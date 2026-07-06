@@ -29,8 +29,6 @@ I build real-time systems for financial markets. For the last 2.5 years I've bee
 - Shipped an AI feature that translates US market news into Turkish (OpenAI), translated once and served from Redis to keep costs low
 - Cut database load **~60%** with Redis caching; Circuit Breaker + Retry so one failing call can't cascade
 
-**Open to:** international roles in fintech, low-latency systems and backend engineering (remote-friendly).
-
 ---
 
 ## Tech Stack
