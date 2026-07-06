@@ -29,8 +29,6 @@ Finansal piyasalar için gerçek zamanlı sistemler geliştiriyorum. Son 2,5 yı
 - ABD piyasa haberlerini Türkçeye çeviren bir AI özelliği yayına aldım (OpenAI) — her haber bir kez çevrilip Redis'ten sunularak maliyet düşük tutulur
 - Redis cache ile veritabanı yükünü **~%60** azalttım; Circuit Breaker + Retry ile tek bir hatalı çağrının zincirleme çökmeye yol açması engellendi
 
-**Açığım:** fintech, düşük gecikmeli sistemler ve backend mühendisliği alanlarında uluslararası roller (remote uyumlu).
-
 ---
 
 ## Teknolojiler
