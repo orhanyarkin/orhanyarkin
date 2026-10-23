@@ -126,16 +126,6 @@ Ankara Medipol Üniversitesi Startup ve Finans Topluluğu için tek başıma tas
 
 ---
 
-## GitHub
-
-<div align="center">
-
-[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=orhanyarkin&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&cache_seconds=86400)](https://github.com/orhanyarkin?tab=repositories)
-
-</div>
-
----
-
 <div align="center">
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn'de_Bağlan-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/orhanyarkin)
