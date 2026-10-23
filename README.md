@@ -8,7 +8,7 @@
 
 # Orhan Yarkın
 
-**Software Engineer — Real-Time Systems for Financial Markets**
+**Software Engineer | Backend & Real-Time Market Data (C#, .NET)**
 
 [![Location](https://img.shields.io/badge/Istanbul,_Turkey-4f46e5?style=for-the-badge&logo=googlemaps&logoColor=white)](https://github.com/orhanyarkin)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/orhanyarkin)
@@ -20,14 +20,15 @@
 
 ## About
 
-I build real-time systems for financial markets. For the last 2.5 years I've been developing **InfoX**, a mobile trading app for the BIST and US markets — owning features end to end, from architecture to production.
+I build backend systems for financial markets. For nearly 3 years I've been working on **InfoX**, a mobile trading app for the BIST and US markets, at a brokerage in Istanbul. Most of my work is real-time market data, provider integrations and keeping things stable at market open.
 
-- Run **15+ .NET microservices** serving live market data to thousands of concurrent users
-- Built the real-time market data feed: **WebSocket → RabbitMQ → SignalR**, with automatic primary/fallback failover per trading session
-- Handle market-open spikes of **100,000+ messages/second** without loss (bounded queues, backpressure, .NET Channels)
-- Built the full fundamental analysis module: Hangfire jobs pull data from KAP, TEFAS and the Central Bank; a Strategy-pattern parser turns bank, insurance and industrial statements into **1,000+ metrics**
-- Shipped an AI feature that translates US market news into Turkish (OpenAI), translated once and served from Redis to keep costs low
-- Cut database load **~60%** with Redis caching; Circuit Breaker + Retry so one failing call can't cascade
+- Develop and run **C# / .NET** services in a microservice architecture of 30+ services, from development to monitoring and incident response
+- Integrated BIST and US market data providers over **REST and WebSocket**, with retries, circuit breakers and automatic failover between providers
+- Reworked the real-time price distribution service (**RabbitMQ → SignalR**) so a slow client can't delay the others at market open
+- Migrated US market data to a new provider without changing the mobile API contract. Serving snapshots from memory cut response times from hundreds of milliseconds to **under 30 ms**
+- Built the fundamental analysis and stock screening module from scratch to production. Hangfire jobs pull data from KAP, TEFAS and the Central Bank, and a Strategy-pattern parser turns bank, insurance and industrial statements into **1,000+ metrics**
+- Built an LLM feature that translates US market news into Turkish with the OpenAI API, using batching, JSON output and Redis caching to keep cost low
+- Cut database load by **~60%** with Redis caching and request coalescing
 
 ---
 
@@ -46,6 +47,7 @@ I build real-time systems for financial markets. For the last 2.5 years I've bee
 **Messaging & Real-Time**
 
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-ff6600?style=flat-square&logo=rabbitmq&logoColor=white)
+![Kafka](https://img.shields.io/badge/Kafka-231f20?style=flat-square&logo=apachekafka&logoColor=white)
 ![SignalR](https://img.shields.io/badge/SignalR-512bd4?style=flat-square&logo=dotnet&logoColor=white)
 ![WebSocket](https://img.shields.io/badge/WebSocket-4f46e5?style=flat-square&logo=socketdotio&logoColor=white)
 ![Hangfire](https://img.shields.io/badge/Hangfire-2d3748?style=flat-square&logo=dotnet&logoColor=white)
@@ -61,47 +63,66 @@ I build real-time systems for financial markets. For the last 2.5 years I've bee
 
 ![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat-square&logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326ce5?style=flat-square&logo=kubernetes&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232f3e?style=flat-square&logo=amazonwebservices&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7b42bc?style=flat-square&logo=terraform&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/Jenkins-d24939?style=flat-square&logo=jenkins&logoColor=white)
 ![ArgoCD](https://img.shields.io/badge/ArgoCD-ef7b4d?style=flat-square&logo=argo&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-f46800?style=flat-square&logo=grafana&logoColor=white)
 ![Kibana](https://img.shields.io/badge/Kibana-005571?style=flat-square&logo=kibana&logoColor=white)
 
+**AI**
+
+![OpenAI API](https://img.shields.io/badge/OpenAI_API-412991?style=flat-square&logo=openai&logoColor=white)
+![Spring AI](https://img.shields.io/badge/Spring_AI-6db33f?style=flat-square&logo=spring&logoColor=white)
+
 ---
 
 ## Featured Projects
 
-### [tickforge-go](https://github.com/orhanyarkin/tickforge-go) — Multi-Exchange L2 Order Book Engine
+### [saiman](https://github.com/orhanyarkin/saiman) | Agentic Payments Platform (Java, Spring Boot, AWS)
+
+AI agents pay for the data they use with **USDC** over the **x402** protocol on Base Sepolia.
+
+| | |
+|---|---|
+| **Agents** | Planner, researcher, risk and synthesis agents on Spring AI, with spend limits enforced in code |
+| **Payments** | x402 pay-per-request, USDC on Base Sepolia, reconciled against the chain |
+| **Ledger** | Double-entry ledger fed through Kafka with an outbox, always balanced |
+| **Delivery** | Java 25, Spring Boot, Testcontainers, deployed on AWS (ECS, RDS) with Terraform |
+
+### [tickforge-go](https://github.com/orhanyarkin/tickforge-go) | Multi-Exchange L2 Order Book Engine (Go)
 
 Builds a consistent Level-2 order book from live **Binance** and **Coinbase** feeds.
 
 | | |
 |---|---|
 | **Correctness** | Snapshot bootstrap, gap detection, automatic resync |
-| **Concurrency** | Race-free by design — one goroutine owns each book, readers see an immutable snapshot via an atomic pointer, verified with Go's race detector in CI |
-| **Performance** | Hand-written allocation-free JSON scanner: **0 allocs/frame, ~8× faster** than `encoding/json` |
-| **Measurement** | Honest tick-to-process latency, p50/p99 via HdrHistogram, reproducible benchmarks |
+| **Concurrency** | Race-free by design. One goroutine owns each book and readers see an immutable snapshot through an atomic pointer, checked with Go's race detector in CI |
+| **Performance** | Hand-written allocation-free JSON scanner, **0 allocs/frame and ~8× faster** than `encoding/json` |
+| **Measurement** | Tick-to-process latency with p50/p99 via HdrHistogram, reproducible benchmarks |
 | **Delivery** | Distroless Docker image, GitHub Actions CI |
 
-> The original .NET prototype lives in [TickForge](https://github.com/orhanyarkin/TickForge) — the Go rewrite is where active development happens.
+> The original .NET version lives in [TickForge](https://github.com/orhanyarkin/TickForge). Active development happens in the Go rewrite.
 
-### [search-engine-service](https://github.com/orhanyarkin/search-engine-service) — Multi-Provider Search Engine (.NET 10)
+### [search-engine-service](https://github.com/orhanyarkin/search-engine-service) | Multi-Provider Search Engine (.NET 10)
 
-A search service that ingests data from multiple content providers (JSON & XML), normalizes it, ranks results with a weighted scoring algorithm, and serves them over a REST API. Built as a company case study against mock provider APIs.
+A search service that ingests data from multiple content providers (JSON and XML), normalizes it, ranks results with a weighted scoring algorithm and serves them over a REST API. Built as a company case study against mock provider APIs.
 
 | | |
 |---|---|
 | **Architecture** | Clean Architecture (4 layers), CQRS with MediatR, JWT auth |
-| **Search** | Elasticsearch with BM25 relevance, fuzzy matching, prefix & wildcard queries |
-| **Data** | PostgreSQL (EF Core, code-first) + Redis cache via the Decorator pattern with key-prefix invalidation |
-| **Events** | RabbitMQ + MassTransit — async cache invalidation and reindexing after sync |
-| **Quality** | xUnit + Moq + FluentAssertions; one-command `docker-compose` bringing up all 5 services |
+| **Search** | Elasticsearch with BM25 relevance, fuzzy matching, prefix and wildcard queries |
+| **Data** | PostgreSQL (EF Core, code-first) and a Redis cache through the Decorator pattern with key-prefix invalidation |
+| **Events** | RabbitMQ and MassTransit for async cache invalidation and reindexing after sync |
+| **Quality** | xUnit, Moq and FluentAssertions, one `docker-compose` command brings up all 5 services |
 
-### [finance-uni-club](https://github.com/orhanyarkin/finance-uni-club) — Startup & Finance Community Platform
+### [finance-uni-club](https://github.com/orhanyarkin/finance-uni-club) | Startup & Finance Community Website
 
-Community platform I built and run end to end for a university startup & finance club — live in production at [startupvefinanstoplulugu.com](https://www.startupvefinanstoplulugu.com).
+Website I designed and built on my own for the Startup & Finance Community at Ankara Medipol University, live at [startupvefinanstoplulugu.com](https://startupvefinanstoplulugu.com).
 
-- **Next.js 14 + TypeScript + Sanity CMS**, built for SEO and performance
-- Deployed on **Vercel** with CI/CD and automatic preview builds on every pull request
+- **Next.js 16, TypeScript and Sanity CMS**, with blog, events and team pages in Turkish and English
+- Data hub with macroeconomic data from the **TCMB EVDS** and **World Bank** APIs, charted with Recharts
+- Deployed on **Vercel** with preview builds on every pull request
 
 ---
 
@@ -115,19 +136,7 @@ Community platform I built and run end to end for a university startup & finance
 
 ---
 
-## Currently
-
-```yaml
-building:   tickforge-go — pushing the hot path toward zero allocations
-learning:   market microstructure, exchange feed protocols (ITCH/SBE), Go internals
-open_to:    fintech · low-latency systems · backend engineering · remote
-```
-
----
-
 <div align="center">
-
-**"Willing to question defaults and rebuild from first principles."**
 
 [![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/orhanyarkin)
 [![Email](https://img.shields.io/badge/Say_Hello-6366f1?style=for-the-badge&logo=gmail&logoColor=white)](mailto:orhanyarkin@gmail.com)

@@ -8,7 +8,7 @@
 
 # Orhan Yarkın
 
-**Yazılım Mühendisi — Finansal Piyasalar için Gerçek Zamanlı Sistemler**
+**Yazılım Mühendisi | Backend ve Gerçek Zamanlı Piyasa Verisi (C#, .NET)**
 
 [![Konum](https://img.shields.io/badge/İstanbul,_Türkiye-4f46e5?style=for-the-badge&logo=googlemaps&logoColor=white)](https://github.com/orhanyarkin)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/orhanyarkin)
@@ -20,20 +20,21 @@
 
 ## Hakkımda
 
-Finansal piyasalar için gerçek zamanlı sistemler geliştiriyorum. Son 2,5 yıldır BIST ve ABD piyasaları için bir mobil trading uygulaması olan **InfoX** üzerinde çalışıyorum — özellikleri mimariden production'a uçtan uca sahiplenerek.
+Finansal piyasalar için backend sistemleri geliştiriyorum. 3 yıla yakın süredir İstanbul'da bir aracı kurumda, BIST ve ABD piyasalarında işlem yapılan mobil yatırım uygulaması **InfoX** üzerinde çalışıyorum. İşimin büyük kısmı gerçek zamanlı piyasa verisi, veri sağlayıcı entegrasyonları ve seans açılışlarında sistemi ayakta tutmak.
 
-- Binlerce eşzamanlı kullanıcıya canlı piyasa verisi sunan **15+ .NET mikroservisi** geliştiriyor ve işletiyorum
-- Gerçek zamanlı piyasa veri akışını kurdum: **WebSocket → RabbitMQ → SignalR**, seans bazlı otomatik primary/fallback failover ile
-- Piyasa açılışındaki **saniyede 100.000+ mesajlık** yükü kayıpsız karşılıyorum (bounded queue, backpressure, .NET Channels)
-- Temel analiz modülünün tamamını geliştirdim: Hangfire job'ları KAP, TEFAS ve TCMB'den veri toplar; Strategy pattern tabanlı bir parser banka, sigorta ve sanayi bilançolarını **1.000+ metriğe** dönüştürür
-- ABD piyasa haberlerini Türkçeye çeviren bir AI özelliği yayına aldım (OpenAI) — her haber bir kez çevrilip Redis'ten sunularak maliyet düşük tutulur
-- Redis cache ile veritabanı yükünü **~%60** azalttım; Circuit Breaker + Retry ile tek bir hatalı çağrının zincirleme çökmeye yol açması engellendi
+- 30'dan fazla servisten oluşan mikroservis mimarisinde **C# / .NET** servislerini geliştirmeden izlemeye ve sorunlara müdahaleye kadar yönetiyorum
+- BIST ve ABD piyasa verisi sağlayıcılarını **REST ve WebSocket** üzerinden entegre ettim, retry, circuit breaker ve sağlayıcılar arası otomatik failover ekledim
+- Gerçek zamanlı fiyat dağıtım servisini (**RabbitMQ → SignalR**) yeniden ele aldım, seans açılışında yavaş bir istemcinin diğerlerini geciktirmesini önledim
+- ABD piyasa verisini mobil uygulamanın API sözleşmesini değiştirmeden yeni bir sağlayıcıya taşıdım. Anlık verileri bellekten sunarak yanıt süresini yüzlerce milisaniyeden **30 ms'nin altına** indirdim
+- Temel analiz ve hisse filtreleme modülünü sıfırdan canlıya kadar geliştirdim. Hangfire görevleri KAP, TEFAS ve TCMB'den veri topluyor, Strategy pattern tabanlı bir parser banka, sigorta ve sanayi bilançolarını **1.000'den fazla metriğe** dönüştürüyor
+- OpenAI API ile ABD piyasa haberlerini Türkçeye çeviren bir LLM özelliği geliştirdim. Maliyeti düşük tutmak için toplu istek, JSON çıktı ve Redis önbelleği kullandım
+- Redis önbelleği ve istek birleştirme ile veritabanı yükünü **yaklaşık %60** azalttım
 
 ---
 
 ## Teknolojiler
 
-**Diller & Framework'ler**
+**Diller ve Framework'ler**
 
 ![C#](https://img.shields.io/badge/C%23-512bd4?style=flat-square&logo=dotnet&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET_6--10-512bd4?style=flat-square&logo=dotnet&logoColor=white)
@@ -43,65 +44,85 @@ Finansal piyasalar için gerçek zamanlı sistemler geliştiriyorum. Son 2,5 yı
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-f7df1e?style=flat-square&logo=javascript&logoColor=black)
 
-**Mesajlaşma & Gerçek Zamanlı**
+**Mesajlaşma ve Gerçek Zamanlı**
 
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-ff6600?style=flat-square&logo=rabbitmq&logoColor=white)
+![Kafka](https://img.shields.io/badge/Kafka-231f20?style=flat-square&logo=apachekafka&logoColor=white)
 ![SignalR](https://img.shields.io/badge/SignalR-512bd4?style=flat-square&logo=dotnet&logoColor=white)
 ![WebSocket](https://img.shields.io/badge/WebSocket-4f46e5?style=flat-square&logo=socketdotio&logoColor=white)
 ![Hangfire](https://img.shields.io/badge/Hangfire-2d3748?style=flat-square&logo=dotnet&logoColor=white)
 
-**Veri & Cache**
+**Veri ve Önbellek**
 
 ![Redis](https://img.shields.io/badge/Redis-dc382d?style=flat-square&logo=redis&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169e1?style=flat-square&logo=postgresql&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479a1?style=flat-square&logo=mysql&logoColor=white)
 ![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=flat-square&logo=elasticsearch&logoColor=white)
 
-**Cloud & DevOps**
+**Cloud ve DevOps**
 
 ![Docker](https://img.shields.io/badge/Docker-2496ed?style=flat-square&logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-326ce5?style=flat-square&logo=kubernetes&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232f3e?style=flat-square&logo=amazonwebservices&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7b42bc?style=flat-square&logo=terraform&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/Jenkins-d24939?style=flat-square&logo=jenkins&logoColor=white)
 ![ArgoCD](https://img.shields.io/badge/ArgoCD-ef7b4d?style=flat-square&logo=argo&logoColor=white)
 ![Grafana](https://img.shields.io/badge/Grafana-f46800?style=flat-square&logo=grafana&logoColor=white)
 ![Kibana](https://img.shields.io/badge/Kibana-005571?style=flat-square&logo=kibana&logoColor=white)
 
+**Yapay Zeka**
+
+![OpenAI API](https://img.shields.io/badge/OpenAI_API-412991?style=flat-square&logo=openai&logoColor=white)
+![Spring AI](https://img.shields.io/badge/Spring_AI-6db33f?style=flat-square&logo=spring&logoColor=white)
+
 ---
 
 ## Öne Çıkan Projeler
 
-### [tickforge-go](https://github.com/orhanyarkin/tickforge-go) — Çoklu Borsa L2 Order Book Motoru
+### [saiman](https://github.com/orhanyarkin/saiman) | Agentic Ödeme Platformu (Java, Spring Boot, AWS)
 
-Canlı **Binance** ve **Coinbase** feed'lerinden tutarlı bir Level-2 order book kurar.
+Yapay zeka ajanlarının kullandıkları veri için Base Sepolia üzerinde **x402** protokolüyle **USDC** ödediği bir platform.
 
 | | |
 |---|---|
-| **Doğruluk** | Snapshot bootstrap, gap tespiti, otomatik resync |
-| **Eşzamanlılık** | Tasarım gereği race-free — her book'u tek bir goroutine sahiplenir, okuyucular immutable snapshot'ı atomic pointer üzerinden okur; Go'nun race detector'ı CI'da doğrular |
-| **Performans** | Elle yazılmış allocation-free JSON scanner: **frame başına 0 alloc, `encoding/json`'a göre ~8× hızlı** |
-| **Ölçüm** | Dürüst tick-to-process gecikmesi, HdrHistogram ile p50/p99, tekrar üretilebilir benchmark'lar |
+| **Ajanlar** | Spring AI üzerinde planlayıcı, araştırmacı, risk ve sentez ajanları, harcama limitleri kodla denetleniyor |
+| **Ödemeler** | x402 ile istek başına ödeme, Base Sepolia üzerinde USDC, zincirle karşılaştırma |
+| **Defter** | Kafka ve outbox ile beslenen, her zaman dengede kalan çift taraflı kayıt defteri (ledger) |
+| **Dağıtım** | Java 25, Spring Boot, Testcontainers, Terraform ile AWS'ye (ECS, RDS) kurulum |
+
+### [tickforge-go](https://github.com/orhanyarkin/tickforge-go) | Çok Borsalı L2 Order Book Motoru (Go)
+
+Canlı **Binance** ve **Coinbase** akışlarından tutarlı bir Level-2 order book oluşturur.
+
+| | |
+|---|---|
+| **Doğruluk** | Snapshot ile başlangıç, eksik güncelleme tespiti, otomatik yeniden senkronizasyon |
+| **Eşzamanlılık** | Tasarım gereği race condition yok. Her book'un sahibi tek bir goroutine, okuyucular atomic pointer üzerinden değişmez snapshot görüyor. CI'da Go'nun race detector'ı ile doğrulanıyor |
+| **Performans** | Elle yazılmış, bellek ayırmayan JSON ayrıştırıcı. **Frame başına 0 allocation**, `encoding/json`'dan **yaklaşık 8 kat hızlı** |
+| **Ölçüm** | HdrHistogram ile p50/p99 tick-to-process gecikmesi, tekrarlanabilir benchmark'lar |
 | **Dağıtım** | Distroless Docker imajı, GitHub Actions CI |
 
-> Orijinal .NET prototipi [TickForge](https://github.com/orhanyarkin/TickForge) reposunda — aktif geliştirme Go tarafında.
+> İlk .NET sürümü [TickForge](https://github.com/orhanyarkin/TickForge) reposunda. Aktif geliştirme Go sürümünde devam ediyor.
 
-### [search-engine-service](https://github.com/orhanyarkin/search-engine-service) — Çoklu Sağlayıcılı Arama Motoru (.NET 10)
+### [search-engine-service](https://github.com/orhanyarkin/search-engine-service) | Çok Sağlayıcılı Arama Motoru (.NET 10)
 
-Birden fazla content provider'dan (JSON & XML) veri çeken, normalize eden, weighted scoring algoritmasıyla puanlayan ve REST API üzerinden sunan bir arama servisi. Mock provider API'lerine karşı bir şirket case study'si olarak geliştirildi.
+Birden fazla içerik sağlayıcısından (JSON ve XML) veri çeken, normalize eden, ağırlıklı puanlama algoritmasıyla sıralayan ve REST API üzerinden sunan bir arama servisi. Mock sağlayıcı API'lerine karşı bir şirket case study'si olarak geliştirildi.
 
 | | |
 |---|---|
 | **Mimari** | Clean Architecture (4 katman), MediatR ile CQRS, JWT auth |
-| **Arama** | Elasticsearch — BM25 relevance, fuzzy match, prefix & wildcard sorgular |
-| **Veri** | PostgreSQL (EF Core, code-first) + Decorator pattern ile Redis cache, key-prefix invalidation |
-| **Event'ler** | RabbitMQ + MassTransit — sync sonrası async cache invalidation ve reindex |
-| **Kalite** | xUnit + Moq + FluentAssertions; tek komutla 5 servisi ayağa kaldıran `docker-compose` |
+| **Arama** | Elasticsearch ile BM25 relevance, fuzzy match, prefix ve wildcard sorgular |
+| **Veri** | PostgreSQL (EF Core, code-first) ve Decorator pattern ile Redis önbelleği, key-prefix invalidation |
+| **Olaylar** | Senkronizasyon sonrası asenkron önbellek temizleme ve yeniden indeksleme için RabbitMQ ve MassTransit |
+| **Kalite** | xUnit, Moq ve FluentAssertions, tek `docker-compose` komutuyla 5 servis ayağa kalkıyor |
 
-### [finance-uni-club](https://github.com/orhanyarkin/finance-uni-club) — Startup & Finans Topluluğu Platformu
+### [finance-uni-club](https://github.com/orhanyarkin/finance-uni-club) | Startup ve Finans Topluluğu Web Sitesi
 
-Bir üniversite startup & finans topluluğu için uçtan uca geliştirip işlettiğim platform — [startupvefinanstoplulugu.com](https://www.startupvefinanstoplulugu.com) adresinde canlı.
+Ankara Medipol Üniversitesi Startup ve Finans Topluluğu için tek başıma tasarlayıp geliştirdiğim web sitesi, [startupvefinanstoplulugu.com](https://startupvefinanstoplulugu.com) adresinde yayında.
 
-- **Next.js + TypeScript + Sanity CMS**, SEO ve performans odaklı
-- **Vercel** üzerinde CI/CD, her pull request'te otomatik preview build
+- **Next.js 16, TypeScript ve Sanity CMS** ile Türkçe ve İngilizce blog, etkinlik ve ekip sayfaları
+- **TCMB EVDS** ve **World Bank** API'lerinden gelen makroekonomik verilerin Recharts ile gösterildiği bir veri merkezi
+- **Vercel** üzerinde yayında, her pull request'te preview build alınıyor
 
 ---
 
@@ -115,19 +136,7 @@ Bir üniversite startup & finans topluluğu için uçtan uca geliştirip işlett
 
 ---
 
-## Şu Sıralar
-
-```yaml
-geliştiriyorum:  tickforge-go — hot path'i sıfır allocation'a yaklaştırma
-öğreniyorum:     piyasa mikroyapısı, borsa feed protokolleri (ITCH/SBE), Go internals
-açığım:          fintech · düşük gecikmeli sistemler · backend mühendisliği · remote
-```
-
----
-
 <div align="center">
-
-**"Varsayılanları sorgulayıp gerektiğinde ilk prensiplerden yeniden kurmaya hazır."**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn'de_Bağlan-0a66c2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/orhanyarkin)
 [![Email](https://img.shields.io/badge/Merhaba_De-6366f1?style=for-the-badge&logo=gmail&logoColor=white)](mailto:orhanyarkin@gmail.com)
